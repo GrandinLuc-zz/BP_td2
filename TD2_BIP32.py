@@ -1,3 +1,6 @@
+from ecpy.curves import Curve
+from ecpy.keys import ECPrivateKey
+from ecpy.ecdsa import ECDSA
 import hashlib
 import binascii
 import sys
@@ -72,5 +75,16 @@ print(len(master_private_key))
 print("\nMASTER CHAIN CODE : ", master_chain_code)
 print(len(master_chain_code))
 
+print("\n--------------------\n") 
+
 
 ### Master public key ###
+
+
+cv   = Curve.get_curve('secp256k1')
+master_public_key1 = ECPrivateKey(master_private_key, cv)
+master_public_key2 = ECPrivateKey(int(master_private_key,2), cv)
+print(master_public_key1)
+print(type(master_public_key1))
+print(master_public_key2)
+print(type(master_public_key2))
