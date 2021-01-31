@@ -82,9 +82,6 @@ print("\n--------------------\n")
 
 
 cv   = Curve.get_curve('secp256k1')
-master_public_key1 = ECPrivateKey(master_private_key, cv)
-master_public_key2 = ECPrivateKey(int(master_private_key,2), cv)
-print(master_public_key1)
-print(type(master_public_key1))
-print(master_public_key2)
-print(type(master_public_key2))
+master_public_key = ECPrivateKey(int(master_private_key, 2), cv)
+print(master_public_key)
+print(type(master_public_key))
