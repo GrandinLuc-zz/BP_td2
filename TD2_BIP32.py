@@ -60,14 +60,13 @@ print("\n--------------------\n")
 print("Hash de la root seed : ", output)
 print(type(output))
 
-hash_root_bit = bin(int(output, 16))[2:].zfill(512)
-hash_root_bit = hash_root_bit
+extended_private_key = bin(int(output, 16))[2:].zfill(512)
 print("\n--------------------\n") 
-print("Hash de la root seed sous forme binaire : ", hash_root_bit)
-print(len(hash_root_bit))
+print("Hash de la root seed sous forme binaire : ", extended_private_key)
+print(len(extended_private_key))
 
-master_private_key = hash_root_bit[:256]
-master_chain_code = hash_root_bit[256:]
+master_private_key = extended_private_key[:256]
+master_chain_code = extended_private_key[256:]
 
 print("\n--------------------\n") 
 print("MASTER PRIVATE KEY : ", master_private_key)
