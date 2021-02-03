@@ -65,9 +65,9 @@ print(len(extended_private_key))
 master_private_key = extended_private_key[:256]
 master_chain_code = extended_private_key[256:]
 
-print("\nMASTER PRIVATE KEY : ", master_private_key)
+print("\nMaster private key : ", master_private_key)
 print(len(master_private_key))
-print("\nMASTER CHAIN CODE : ", master_chain_code)
+print("\nMaster chain code : ", master_chain_code)
 print(len(master_chain_code))
 
 
@@ -81,20 +81,23 @@ print(len(master_chain_code))
 
 ### Child keys ###
 
-print("\n--------------------\n") 
+print("\n--------------------") 
 
-key = int("0", 2).to_bytes(2, 'big') # index 0
+for index in range(3):
 
-child_keys = hmac.new(key=key, msg=extended_private_key_bytes, digestmod=hashlib.sha512).hexdigest().encode('utf-8')
-child_keys = bin(int(child_keys, 16))[2:].zfill(512) # convert bytes to string
+    byte_index = (index).to_bytes(2, 'big')
+    child_keys = hmac.new(key=byte_index, msg=extended_private_key_bytes, digestmod=hashlib.sha512).hexdigest().encode('utf-8')
+    
+    child_keys = bin(int(child_keys, 16))[2:].zfill(512) # convert bytes to string
+    
+    child_private_key = child_keys[:256]
+    child_chain_code = child_keys[256:]
 
-print("Child Keys : ", child_keys)
-print(len(child_keys))
+    print("\n     INDEX = ", index)
+    print("\nChild Keys : ", child_keys)
+    print(len(child_keys))
 
-child_private_key = child_keys[:256]
-child_chain_code = child_keys[256:]
-
-print("\nCHILD PRIVATE KEY : ", child_private_key)
-print(len(child_private_key))
-print("\nCHILD CHAIN CODE : ", child_chain_code)
-print(len(child_chain_code))
+    print("\nChild pivate key : ", child_private_key)
+    print(len(child_private_key))
+    print("\nChild chain code : ", child_chain_code)
+    print(len(child_chain_code))
