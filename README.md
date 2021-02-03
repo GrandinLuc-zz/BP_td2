@@ -40,4 +40,6 @@ Il est important de souligner qu'il faut rajouter des 0 en début de nombre bina
 
 ### Extraction de la master private key et du chain code
 Dans cette partie nous utilisons un mnemonic exemple : ['open', 'curious', 'climb', 'dog', 'strong', 'ridge', 'brush', 'capable', 'music', 'noodle', 'degree', 'jungle']. A cette seed nous appliquons la fonction d'importation de seed afin de travailler sur notre seed en binaire.
-Cette seed est ensuite convertie en hexadecimal, afin d'être hashé avec la fonction sha512 de la librairie hashlib. Finalement nous obtenons un hash, qui une fois converti en nombre binaire fait 512 bit de long et ainsi, les 256 premier bit forment la "master private key" et 256 bit suivant forment le "master chain code".
+Cette seed, correspondant à notre extended private key, est ensuite convertie en hexadecimal, afin d'être hashé avec la fonction sha512 de la librairie hashlib. Finalement nous obtenons un hash, qui une fois converti en nombre binaire fait 512 bit de long et ainsi, les 256 premiers bits forment la *master private key* et les 256 bits suivant forment le *master chain code*.
+
+On génère par la suite différentes clés enfants en reprenant notre seed (extended private key) auquelle on associe un index (allant de 0 à 2^32) avant de hasher grâce à HMAC-SHA512. Les 256 premiers bits obtenus forment alors la *child private key* d'index *i*, et les 256 bits suivant forment la *child chain code* d'index  *i*.
