@@ -53,23 +53,19 @@ data = binascii.a2b_hex(hexstr)
 print(type(data))
 
 # Utilisation de haslib sur l'hexadecimal
-extended_private_key_bytes = hashlib.sha512(data).hexdigest()
-extended_private_key_bytes = extended_private_key_bytes.encode('utf-8')
-
-print("\n--------------------\n") 
-print("Hash de la root seed : ", extended_private_key_bytes)
+extended_private_key_bytes = hashlib.sha512(data).hexdigest().encode('utf-8')
+ 
+print("\nHash de la root seed : ", extended_private_key_bytes)
 print(type(extended_private_key_bytes))
 
-extended_private_key = bin(int(extended_private_key_bytes, 16))[2:].zfill(512)
-print("\n--------------------\n") 
-print("Hash de la root seed sous forme string binaire : ", extended_private_key)
+extended_private_key = bin(int(extended_private_key_bytes, 16))[2:].zfill(512) # convert extended private key bytes to string
+print("\nHash de la root seed sous forme string binaire : ", extended_private_key)
 print(len(extended_private_key))
-
+ 
 master_private_key = extended_private_key[:256]
 master_chain_code = extended_private_key[256:]
 
-print("\n--------------------\n") 
-print("MASTER PRIVATE KEY : ", master_private_key)
+print("\nMASTER PRIVATE KEY : ", master_private_key)
 print(len(master_private_key))
 print("\nMASTER CHAIN CODE : ", master_chain_code)
 print(len(master_chain_code))
@@ -89,9 +85,8 @@ print("\n--------------------\n")
 
 key = int("0", 2).to_bytes(2, 'big') # index 0
 
-child_keys = hmac.new(key=key, msg=extended_private_key_bytes, digestmod=hashlib.sha512).hexdigest()
-child_keys = child_keys.encode('utf-8')
-child_keys = bin(int(child_keys, 16))[2:].zfill(512)
+child_keys = hmac.new(key=key, msg=extended_private_key_bytes, digestmod=hashlib.sha512).hexdigest().encode('utf-8')
+child_keys = bin(int(child_keys, 16))[2:].zfill(512) # convert bytes to string
 
 print("Child Keys : ", child_keys)
 print(len(child_keys))
