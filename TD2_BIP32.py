@@ -3,6 +3,7 @@ from ecpy.keys import ECPrivateKey
 from ecpy.ecdsa import ECDSA
 import hashlib
 import binascii
+import hmac
 import sys
 
 bip_0039 = open("english.txt",'r')
@@ -79,8 +80,30 @@ print("\n--------------------\n")
 
 ### Master public key ###
 
+# cv   = Curve.get_curve('secp256k1')
+# master_public_key = ECPrivateKey(int(master_private_key, 2), cv)
+# print(master_public_key)
+# print(type(master_public_key))
 
-cv   = Curve.get_curve('secp256k1')
-master_public_key = ECPrivateKey(int(master_private_key, 2), cv)
-print(master_public_key)
-print(type(master_public_key))
+
+### Child keys ###
+
+print("\n--------------------\n") 
+
+key = int("0", 2).to_bytes(2, 'big') # index 0
+msg = int("110110010110", base=2).to_bytes(2, 'big') # extended_private_key
+
+child_keys = hmac.new(key=key, msg=msg, digestmod=hashlib.sha512).hexdigest()
+child_keys = child_keys.encode('utf-8')
+child_keys = bin(int(child_keys, 16))[2:].zfill(512)
+
+print("Child Keys : ", child_keys)
+print(len(child_keys))
+
+child_private_key = child_keys[:256]
+child_chain_code = child_keys[256:]
+
+print("\nCHILD PRIVATE KEY : ", child_private_key)
+print(len(child_private_key))
+print("\nCHILD CHAIN CODE : ", child_chain_code)
+print(len(child_chain_code))
