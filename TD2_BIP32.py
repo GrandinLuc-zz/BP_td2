@@ -88,7 +88,6 @@ print(len(master_chain_code))
 print("\n--------------------\n") 
 
 key = int("0", 2).to_bytes(2, 'big') # index 0
-# msg = int("110110010110", base=2).to_bytes(2, 'big') # extended_private_key
 
 child_keys = hmac.new(key=key, msg=extended_private_key_bytes, digestmod=hashlib.sha512).hexdigest()
 child_keys = child_keys.encode('utf-8')
