@@ -4,7 +4,6 @@ from ecpy.ecdsa import ECDSA
 import hashlib
 import binascii
 import hmac
-import sys
 
 bip_0039 = open("english.txt",'r')
 words = bip_0039.read()

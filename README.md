@@ -4,9 +4,9 @@ Luc GRANDIN, Laith EL MERSHATI, Guillaume RICHER
 ## Instruction 
 Après la création du repo Github, nous avons décidé de créer le programme en python pour faire ce TD.
 Le programme peut être éxecuter uniquement en lignes de commandes et seules sont néscéssaires les librairies :
-* haslib 
-* sys
+* hashlib 
 * binascii
+* hmac
 * escpy
 
 Pour lancer la première partie du TD depuis la console 
@@ -39,4 +39,4 @@ Il est important de souligner qu'il faut rajouter des 0 en debut de nombre binai
 
 ### Extraction de la master private key et du chain code
 Dans cette partie nous utilisons un mnemonic exemple : ['open', 'curious', 'climb', 'dog', 'strong', 'ridge', 'brush', 'capable', 'music', 'noodle', 'degree', 'jungle']. A cette seed nous appliquons la fonction d'importation de seed afin de travailler sur notre seed en binaire.
-Cette seed est ensuite convertie en hexadecimal, afin d'être hasher avec la fonction sha512 de la librairie hashlib. Finalement nous obtenons un hash, qui une fois converti en nombre binaire fait 512 bit de long et ainsi, les 256 premier bit forment la "master private key" et 256 bit suivant forment le "master chain code".
+Cette seed est ensuite convertie en hexadecimal, afin d'être hashé avec la fonction sha512 de la librairie hashlib. Finalement nous obtenons un hash, qui une fois converti en nombre binaire fait 512 bit de long et ainsi, les 256 premier bit forment la "master private key" et 256 bit suivant forment le "master chain code".
