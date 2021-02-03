@@ -1,15 +1,22 @@
 # Blockchain Programmation td2
 Luc GRANDIN, Laith EL MERSHATI, Guillaume RICHER
 
-## **BIP 0039**
-
-### Création du programme 
+## Instruction 
 Après la création du repo Github, nous avons décidé de créer le programme en python pour faire ce TD.
 Le programme peut être éxecuter uniquement en lignes de commandes et seules sont néscéssaires les librairies :
 * haslib 
 * sys
 * binascii
 * escpy
+
+Pour lancer la première partie du TD depuis la console 
+* python .\TD_BIP39.py
+* python .\TD2_BIP39_import_seed.py , pour la dernière question de la première partie du TD
+
+Pour lancer la seconde partie du TD depuis la console 
+* python .\TD_BIP32.py
+
+## **BIP 0039**
 
 ### Création d'un entier aléatoire
 Pour créer notre entier aléatoire (entropy) nous avons utilisé la fonction os.urandom de python qui est cryptographiquement sécurisée. Cet entier fait 128 bit, soit 16 bytes.
@@ -30,3 +37,6 @@ Il est important de souligner qu'il faut rajouter des 0 en debut de nombre binai
 
 ## **BIP 0032**
 
+### Extraction de la master private key et du chain code
+Dans cette partie nous utilisons un mnemonic exemple : ['open', 'curious', 'climb', 'dog', 'strong', 'ridge', 'brush', 'capable', 'music', 'noodle', 'degree', 'jungle']. A cette seed nous appliquons la fonction d'importation de seed afin de travailler sur notre seed en binaire.
+Cette seed est ensuite convertie en hexadecimal, afin d'être hasher avec la fonction sha512 de la librairie hashlib. Finalement nous obtenons un hash, qui une fois converti en nombre binaire fait 512 bit de long et ainsi, les 256 premier bit forment la "master private key" et 256 bit suivant forment le "master chain code".
